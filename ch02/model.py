@@ -6,4 +6,12 @@ class Item(BaseModel):
     status: str
 class Todo(BaseModel):
     id: int
-    item: Item
+    item: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "id": 1,
+                "item": "Example Schema!"
+            }
+        }
