@@ -38,3 +38,22 @@ async def update_todo(todo_data: TodoItem, todo_id: int = Path(..., title="The I
     return {
         "message": "Todo with supplied ID doesn't exits."
     }
+
+@todo_router.delete('/todo/{todo_id}')
+async def delete_todo(todo_id: int):
+    for index, todo in enumerate(todo_list):
+        if todo.id == todo_id:
+            todo_list.pop(index)
+            return {
+                "message": "Todo deleted successfully."
+            }
+    return {
+        "message": "Todo with suppliced ID doesn't exist."
+    }
+
+@todo_router.delete("/tood")
+async def delete_all_todo() -> dict:
+    todo_list.clear()
+    return {
+        "message": "Todos deleted successfully."
+    }
