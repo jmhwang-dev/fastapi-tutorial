@@ -37,10 +37,10 @@ async def update_todo(todo_data: TodoItem, todo_id: int = Path(..., title="The I
             return {
                 "message": "Todo updated successfully."
             }
-    
-    return {
-        "message": "Todo with supplied ID doesn't exits."
-    }
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Todo with supplied ID doesn't exist."
+    )
 
 @todo_router.delete('/todo/{todo_id}')
 async def delete_todo(todo_id: int):
@@ -50,6 +50,7 @@ async def delete_todo(todo_id: int):
             return {
                 "message": "Todo deleted successfully."
             }
-    return {
-        "message": "Todo with suppliced ID doesn't exist."
-    }
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Todo with supplied ID doesn't exist."
+    )
