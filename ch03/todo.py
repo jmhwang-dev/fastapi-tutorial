@@ -28,3 +28,28 @@ async def add_todo(todo: Todo) -> dict:
     return {
         "message": "Todo item added successfully."
     }
+
+@todo_router.put('/todo/{todo_id}')
+async def update_todo(todo_data: TodoItem, todo_id: int = Path(..., title="The ID of the todo to be updated.")) -> dict:
+    for todo in todo_list:
+        if todo.id == todo_id:
+            todo.item = todo_data.item
+            return {
+                "message": "Todo updated successfully."
+            }
+    
+    return {
+        "message": "Todo with supplied ID doesn't exits."
+    }
+
+@todo_router.delete('/todo/{todo_id}')
+async def delete_todo(todo_id: int):
+    for index, todo in enumerate(todo_list):
+        if todo.id == todo_id:
+            todo_list.pop(index)
+            return {
+                "message": "Todo deleted successfully."
+            }
+    return {
+        "message": "Todo with suppliced ID doesn't exist."
+    }
