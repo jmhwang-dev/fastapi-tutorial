@@ -11,7 +11,8 @@ templates = Jinja2Templates(directory="templates/")
 async def get_single_todo(request: Request, todo_id: int = Path(..., title="ReDoc에만 나와요", description="ReDoc, Swagger 둘다 나와요")):
     for todo in todo_list:
         if todo.id == todo_id:
-            return templates.TemplateResponse("todo.html", {
+            return templates.TemplateResponse(
+                "todo.html", {
                 "request": request,
                 "todo": todo
             })
@@ -22,18 +23,22 @@ async def get_single_todo(request: Request, todo_id: int = Path(..., title="ReDo
 
 @todo_router.get("/todo", response_model=TodoItems)
 async def retrive_todo(request: Request) -> dict:
-    return templates.TemplateResponse("todo.html", {
+    return templates.TemplateResponse(
+        "todo.html", {
         "request": request,
         "todos": todo_list
     })
     
 
-@todo_router.post('/todo', status_code=201)
-async def add_todo(todo: Todo) -> dict:
+@todo_router.post('/todo')
+async def add_todo(request: Request, todo: Todo = Depends(Todo.as_form)) -> dict:
+    todo.id = len(todo_list) + 1
     todo_list.append(todo)
-    return {
-        "message": "Todo item added successfully."
-    }
+    return templates.TemplateResponse(
+        "todo.html", {
+        "request": request,
+        "todos": todo_list
+    })
 
 @todo_router.put('/todo/{todo_id}')
 async def update_todo(todo_data: TodoItem, todo_id: int = Path(..., title="The ID of the todo to be updated.")) -> dict:
