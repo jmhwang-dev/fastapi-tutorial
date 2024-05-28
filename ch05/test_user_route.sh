@@ -1,4 +1,5 @@
-echo "POST /signup test"
+echo -e "\n"
+echo "test: POST /signup"
 curl -X POST http://127.0.0.1:8000/user/signup \
 -H accept:application/json \
 -H Content-Type:application/json \
@@ -9,7 +10,7 @@ curl -X POST http://127.0.0.1:8000/user/signup \
 
 echo -e "\n"
 
-echo "POST /signin test"
+echo "test: POST /signin"
 curl -X POST http://127.0.0.1:8000/user/signin \
 -H accept:application/json \
 -H Content-Type:application/json \
