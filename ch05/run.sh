@@ -10,4 +10,4 @@ touch {database,routes,models}/__init__.py
 touch database/connection.py
 touch {routes,models}/{events,users}.py
 
-pip install -r ../requirements.txt
+pip install -r ../../requirements.txt
