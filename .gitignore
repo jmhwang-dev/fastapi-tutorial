@@ -1,6 +1,7 @@
 # custom
 command.sh
 planner.db
+.fastapi/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
