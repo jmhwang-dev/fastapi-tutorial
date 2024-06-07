@@ -11,3 +11,4 @@ pydantic[email]==2.1.1
 # ch06
 sqlmodel==0.0.18
 beanie==1.13.1
+python-dotenv # pydantic[dotenv] -> WARNING: pydantic 2.1.1 does not provide the extra 'dotenv'
