@@ -11,7 +11,7 @@ user_database = Database(User)
 @user_router.post("/signup")
 async def sign_new_user(user: User) -> dict:
     user_exist = await User.find_one(User.email == user.email)
-    if not user_exist:
+    if user_exist:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="User with supplied username exists"

@@ -2,6 +2,7 @@ from pydantic import EmailStr
 from typing import Optional, List
 from models.events import Event
 from beanie import Document
+from pydantic import BaseModel
 
 class User(Document):
     email: EmailStr
@@ -20,6 +21,6 @@ class User(Document):
             }
         }
 
-class UserSignIn(Document):
+class UserSignIn(BaseModel):
     email: EmailStr
     password: str
