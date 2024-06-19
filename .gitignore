@@ -2,6 +2,7 @@
 command.sh
 planner.db
 .fastapi/
+store/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
