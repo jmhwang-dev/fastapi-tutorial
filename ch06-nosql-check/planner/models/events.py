@@ -1,5 +1,7 @@
 from beanie import Document
 from typing import List, Optional
+from pydantic import BaseModel
+
 class Event(Document):
     title: str
     image: str
@@ -20,7 +22,7 @@ class Event(Document):
     class Settings:
         name = "events"
 
-class EventUpdate(Document):
+class EventUpdate(BaseModel):
     title: Optional[str] = None
     image: Optional[str] = None
     description: Optional[str] = None
