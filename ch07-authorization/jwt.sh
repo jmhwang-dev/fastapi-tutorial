@@ -1,0 +1,1 @@
+echo "SECRET_KEY=HKLJHPOIH1DEFC" >> .env
