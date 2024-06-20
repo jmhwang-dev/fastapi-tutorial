@@ -17,10 +17,9 @@ class User(Document):
             "example": {
                 "email": "fastapi@packt.com",
                 "password": "strong!!!",
-                "events": []
             }
         }
 
-class UserSignIn(BaseModel):
-    email: EmailStr
-    password: str
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
