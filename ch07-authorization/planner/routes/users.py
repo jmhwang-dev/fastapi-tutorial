@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, status
 from models.users import User, UserSignIn
 from database.connection import Database
 from auth.hash_password import HashPassword
+from typing import List
+from beanie import PydanticObjectId
 
 user_router = APIRouter(
     tags=["User",]
@@ -41,3 +43,20 @@ async def sign_user_in(user: UserSignIn) -> dict:
     return {
         "message": "User signed in successfully."
     }
+
+@user_router.delete("/{id}")
+async def delete_user(id: PydanticObjectId) -> dict:
+    user = await user_database.delete(id)
+    if user:
+        return {
+            "message": "User deleted successfully."
+        }
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="User with supplied ID does not exist"
+    )
+
+@user_router.get("/")
+async def get_all_user() -> List[User]:
+    all_user = await user_database.get_all()
+    return all_user
