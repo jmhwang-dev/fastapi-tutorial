@@ -70,3 +70,25 @@ async get_user_details(user: User = Depends(get_user)):
     - Payload
     - Signiture
     - Algorithm
+
+# 7.3 실습
+- 코드 참조
+
+# 7.4 CORS 설정
+- 등록되지 않은 사용자가 리소스를 사용하지 못하도록 제한하는 규칙
+- 프론트엔드 애플리케이션이 web API를 호출하면 브라우저가 호출의 출처를 확인해서 제한한다.
+- `CORSMiddleware`라는 미들웨어를 통해 API 접근 가능한 출처를 관리한다.
+> 미들웨어: 하나의 함수로, 특정 처리 사이의 중개자 역할을 한다. Web API에서 미들웨어는 요청과 응답 간 중개자이다.
+```python
+# main.py
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = ["*"]     # 모든 클라이언트의 요청을 허가. `*`는 와일드카드를 의미하며, API에거 모든 요청을 허가하도록 지시한다
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+```
