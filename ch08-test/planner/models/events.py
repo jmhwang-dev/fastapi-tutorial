@@ -24,7 +24,6 @@ class Event(Document):
         name = "events"
 
 class EventUpdate(BaseModel):
-    # creator: Optional[str] = None
     title: Optional[str] = None
     image: Optional[str] = None
     description: Optional[str] = None
